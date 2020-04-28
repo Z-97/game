@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<messages package="com.alex.game.bank" id="203">
+	<!-- dto定义 -->
+	<bean name="BankRecordInfo" explain="银行记录信息">
+		<field class="long" name="time" explain="时间"></field>
+		<field class="String" name="type" explain="0:存款,1:取款"></field>
+		<field class="long" name="money" explain="金额"></field>
+		<field class="long" name="beforeMoney" explain="操作前"></field>
+		<field class="long" name="afterMoney" explain="操作后"></field>
+	</bean>	
+	
+	<bean name="ExchangeRecordInfo" explain="玩家信息">
+		<field class="long" name="id" explain="兑换记录id"></field>
+		<field class="long" name="time" explain="时间"></field>
+		<field class="String" name="account" explain="账号"></field>
+		<field class="long" name="money" explain="金额"></field>
+		<field class="int" name="status" explain="状态(0:成功,1:处理中,2:失败)"></field>
+	</bean>	
+	
+	<!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqDepositeGold" explain="存金币">
+		<field class="long" name="gold" explain="金币"></field>
+	</message>
+	
+	<message id="103" type="CS" name="ReqWithdrawGold" explain="取金币">
+		<field class="String" name="bankPwd" explain="银行密码"></field>
+		<field class="long" name="gold" explain="金币"></field>
+	</message>
+	
+	<message id="105" type="CS" name="ReqTransferGold" explain="转账">
+		<field class="String" name="bankPwd" explain="银行密码"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="long" name="target" explain="转账目标玩家"></field>
+	</message>
+	
+	<message id="107" type="CS" name="ReqBindingAlipay" explain="绑定支付宝">
+		<field class="String" name="alipay" explain="支付宝"></field>
+		<field class="String" name="alipayName" explain="支付宝姓名"></field>
+	</message>
+	
+	<message id="109" type="CS" name="ReqExchangeCash" explain="兑换银行金币为现金">
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="int" name="type" explain="0:普通兑换,1:代理兑换"></field>
+		<field class="int" name="exchangeType" explain="0:支付宝兑换,1:银行卡兑换"></field>
+	</message>
+	
+	<message id="111" type="CS" name="ReqBankRecords" explain="请求银行记录">
+	</message>
+	
+	<message id="113" type="CS" name="ReqExchangeRecords" explain="请求兑换记录">
+	</message>
+	
+	<message id="115" type="CS" name="ReqModifyBankPwd" explain="修改银行密码">
+		<field class="String" name="oldPwd" explain="旧的银行密码"></field>
+		<field class="String" name="pwd" explain="新密码"></field>
+	</message>
+	
+	<message id="117" type="CS" name="ReqTransferGoldValidate" explain="请求玩家类型">
+		<field class="String" name="bankPwd" explain="银行密码"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="long" name="target" explain="转账目标玩家"></field>
+	</message>
+	
+	<!-- 服务器发送消息 -->
+	<message id="205" type="SC" name="ResTransferGoldSuccess" explain="转账">
+		<field class="long" name="target" explain="目标玩家"></field>
+		<field class="String" name="targetNickName" explain="目标玩家昵称"></field>
+		<field class="long" name="gold" explain="金币"></field>
+	</message>
+
+	<message id="207" type="SC" name="ResBindingAlipay" explain="绑定支付宝">
+		<field class="int" name="res" explain="0:成功,1:格式错误(必须为手机号或邮箱),2:重复绑定支付宝3:支付宝用户名格式不正确"></field>
+	</message>	
+	
+	<message id="209" type="SC" name="ResBankRecords" explain="银行记录">
+		<list class="BankRecordInfo" name="records" explain="记录"></list>
+	</message>
+	
+	<message id="211" type="SC" name="ResExchangeRecords" explain="兑换记录">
+		<list class="ExchangeRecordInfo" name="records" explain="记录"></list>
+	</message>
+	
+	<message id="213" type="SC" name="ResModifyBankPwd" explain="修改银行密码">
+		<field class="int" name="res" explain="0:成功1:密码格式错误2:旧密码错误"></field>
+	</message>
+	
+	<message id="215" type="SC" name="ResExchangeCash" explain="兑换银行金币为现金">
+		<field class="long" name="gold" explain="兑换成功的金额"></field>
+	</message>
+	
+	<message id="217" type="SC" name="ResTransferGoldValidate" explain="玩家类型">
+		<field class="long" name="player" explain="玩家"></field>
+		<field class="int" name="type" explain="0:可以转账,1:玩家不存在,2:目标玩家是代理,3:玩家和玩家不能转,4:还未开启玩家向代理转账,5:转账金额低于最小金额,6:银行密码不对,7:银行金额不足,8:银行密码不能为默认密码"></field>
+	</message>	
+</messages>

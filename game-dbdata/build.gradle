@@ -1,0 +1,14 @@
+dependencies {
+    compile project(':game-core')
+}
+
+// 拷贝资源文件
+processResources.doLast {
+	copy {
+		 from ('src/main/java') {
+			 include '**/*.xml'
+			 include '**/*.properties'
+		 }
+		 into 'build/classes/main'
+	}
+}

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.games.buyu" id="520" game="9">
+	<!-- bean定义 -->
+	<bean name="RoomInfo" explain="捕鱼房间信息">
+		<field class="int" name="id" explain="房间id"></field>
+		<field class="String" name="name" explain="房间名称"></field>
+		<field class="int" name="lower" explain="进入下限"></field>
+		<field class="int" name="playerNum" explain="玩家人数"></field>
+		<field class="int" name="batteryLower" explain="炮台分数下限"></field>
+		<field class="int" name="batteryUpper" explain="炮台分数上限"></field>
+	</bean>
+	
+	<bean name="SeatInfo" explain="座位信息">
+		<field class="int" name="order" explain="座位顺序"></field>
+		<field class="long" name="playerId" explain="玩家id(0:代表座位上没有人)"></field>
+		<field class="String" name="nickName" explain="昵称"></field>
+		<field class="int" name="sex" explain="性别(0:男性,1:女性)"></field>
+		<field class="int" name="icon" explain="头像"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="int" name="level" explain="等级"></field>
+		<field class="int" name="vipLevel" explain="vip等级"></field>
+		<field class="Boolean" name="online" explain="是否在线"></field>
+	</bean>
+		
+	<bean name="FishInfo" explain="鱼信息">
+		<field class="int" name="id" explain="鱼id"></field>
+		<field class="int" name="type" explain="鱼的类型"></field>
+		<field class="int" name="x" explain="起点x"></field>
+		<field class="int" name="y" explain="起点y"></field>
+		<field class="int" name="road" explain="路径id"></field>
+		<field class="long" name="t" explain="时间"></field>
+		<field class="int" name="angle" explain="夹角(负数不处理)"></field>
+	</bean>	
+
+	<bean name="FishDieInfo" explain="鱼死亡信息">
+		<field class="int" name="fishId" explain="鱼id"></field>
+		<field class="int" name="score" explain="分数"></field>
+	</bean>	
+			
+	<bean name="BatteryInfo" explain="炮台信息">
+		<field class="long" name="playerId" explain="玩家id"></field>	
+		<field class="int" name="score" explain="炮管分数"></field>
+		<field class="int" name="skin" explain="皮肤"></field>
+	</bean>	
+
+	<!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqRooms" explain="请求房间数据">
+	</message>
+
+	<message id="103" type="CS" name="ReqEnterRoom" explain="请求进入房间">
+		<field class="int" name="roomId" explain="房间id"></field>
+	</message>
+			
+	<message id="105" type="CS" name="ReqFire" explain="玩家请求开炮">
+		<field class="int" name="angle" explain="夹角"></field>
+		<field class="int" name="bulletId" explain="子弹id"></field>
+	</message>		
+	
+	<message id="107" type="CS" name="ReqHit" explain="子弹打中鱼">
+		<field class="int" name="bulletId" explain="子弹id"></field>
+		<field class="int" name="fishId" explain="鱼id"></field>
+	</message>		
+	
+	<message id="109" type="CS" name="ReqPlusBattery" explain="玩家加炮">
+	</message>	
+		
+	<message id="111" type="CS" name="ReqMinusBattery" explain="玩家减炮">
+	</message>		
+	
+	<message id="113" type="CS" name="ReqExitRoom" explain="请求退出房间">
+	</message>
+	
+	<message id="115" type="CS" name="ReqScence" explain="玩家请求场景数据,玩家中途进入恢复场景">
+	</message>
+	
+	<message id="117" type="CS" name="ReqLock" explain="玩家请求锁定">
+		<field class="int" name="fishId" explain="锁定鱼"></field>	
+	</message>
+	
+	<message id="119" type="CS" name="ReqCancelLock" explain="玩家取消锁定">
+	</message>
+	
+	<message id="121" type="CS" name="ReqSwitchBatterySkin" explain="玩家切换炮台皮肤">
+		<field class="int" name="skin" explain="皮肤"></field>
+	</message>
+	
+	<message id="123" type="CS" name="ReqFastGame" explain="玩家快速游戏">
+	</message>
+		
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResRooms" explain="返回房间数据">
+		<list class="RoomInfo" name="rooms" explain="房间"></list>
+	</message>
+
+	<message id="203" type="SC" name="ResEnterRoom" explain="进入房间结果">
+		<field class="int" name="roomId" explain="房间id"></field>
+		<list class="SeatInfo" name="seats" explain="桌子中的玩家信息"></list>
+	</message>
+
+	<message id="205" type="SC" name="ResExitRoom" explain="玩家请求退出房间">
+		<field class="long" name="playerId" explain="玩家id"></field>
+	</message>	
+	
+	<message id="207" type="SC" name="ResOtherEnterTable" explain="其他人进入桌子">
+		<field class="BatteryInfo" name="battery" explain="炮台"></field>	
+		<field class="SeatInfo" name="seat" explain="进入桌子的其他玩家"></field>
+	</message>
+
+	<message id="209" type="SC" name="ResFire" explain="玩家请求开炮结果">
+		<field class="long" name="playerId" explain="发炮玩家"></field>
+		<field class="int" name="angle" explain="夹角"></field>
+	</message>		
+	
+	<message id="211" type="SC" name="ResBatteryChange" explain="玩家炮台改变消息">
+		<field class="BatteryInfo" name="battery" explain="炮台"></field>	
+	</message>	
+	
+	<message id="213" type="SC" name="ResHit" explain="子弹打死鱼">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<list class="FishDieInfo" name="dies" explain="死亡的鱼"></list>	
+	</message>		
+	
+	<message id="215" type="SC" name="ResSwitchScene" explain="切换场景">
+		<field class="int" name="scene" explain="场景id"></field>
+	</message>	
+
+	<message id="217" type="SC" name="ResProduceFish" explain="产生鱼消息">
+		<list class="FishInfo" name="fishs" explain="鱼"></list>
+	</message>	
+	
+	<message id="219" type="SC" name="ResScence" explain="玩家请求场景数据结果">
+		<field class="int" name="scenceId" explain="场景id"></field>
+		<list class="FishInfo" name="fishs" explain="鱼"></list>	
+		<list class="BatteryInfo" name="batterys" explain="炮台"></list>	
+	</message>	
+	
+	<message id="221" type="SC" name="ResLock" explain="玩家请求锁定结果">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="int" name="fishId" explain="锁定鱼"></field>	
+	</message>	
+	
+	<message id="223" type="SC" name="ResCancelLock" explain="玩家取消锁定">
+		<field class="long" name="playerId" explain="玩家id"></field>
+	</message>
+	
+	<message id="225" type="SC" name="ResGoldChange" explain="玩家金币变化消息">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="gold" explain="玩家金币"></field>
+	</message>
+	
+	<message id="227" type="SC" name="ResSwitchBatterySkin" explain="玩家切换炮台皮肤">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="int" name="skin" explain="皮肤"></field>
+	</message>
+	
+	<message id="229" type="SC" name="ResFreeTimeEnd" explain="免费时间结束">
+	</message>
+			
+</messages>	

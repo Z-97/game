@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.games.zjh" id="522" game="17">
+	<!-- bean定义 -->
+	<bean name="RoomInfo" explain="房间信息">
+		<field class="int" name="id" explain="房间id"></field>
+		<field class="String" name="name" explain="房间名称"></field>
+		<field class="int" name="lower" explain="进入下限"></field>
+	</bean>
+
+	<bean name="SeatInfo" explain="座位信息">
+		<field class="int" name="order" explain="座位顺序"></field>
+		<field class="long" name="playerId" explain="玩家id(0:代表座位上没有人)"></field>
+		<field class="String" name="nickName" explain="昵称"></field>
+		<field class="int" name="sex" explain="性别(0:男性,1:女性)"></field>
+		<field class="int" name="icon" explain="头像"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="int" name="level" explain="等级"></field>
+		<field class="int" name="vipLevel" explain="vip等级"></field>
+		<field class="Boolean" name="online" explain="是否在线"></field>
+		<field class="int" name="state" explain="0:等待,1:准备,2:弃牌,3:淘汰,4:游戏中,5:赢"></field>
+		<field class="long" name="betGold" explain="已下注金币"></field>
+		<field class="Boolean" name="sawCard" explain="是否看过牌"></field>
+	</bean>
+
+	<bean name="PlayerBillInfo" explain="结算信息">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="int" name="order" explain="顺序"></field>
+		<field class="String" name="nickName" explain="玩家昵称"></field>
+		<field class="int" name="state" explain="0:等待,1:准备,2:弃牌,3:淘汰,4:游戏中,5:赢"></field>
+		<field class="long" name="gold" explain="结算金币(不包含税收)"></field>
+		<field class="long" name="tax" explain="税收"></field>
+		<field class="int" name="cardsType" explain="牌型(1:单张,2:对子,3:顺子,4:金华,5:顺金,6:豹子)"></field>
+		<list class="int" name="cards" explain="牌"></list>
+	</bean>
+
+	<!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqRooms" explain="请求房间数据">
+	</message>
+
+	<message id="103" type="CS" name="ReqEnterRoom" explain="请求进入房间">
+		<field class="int" name="roomId" explain="房间id"></field>
+	</message>
+
+	<message id="104" type="CS" name="ReqExchangeTable" explain="请求换桌">
+	</message>
+
+	<message id="105" type="CS" name="ReqReady" explain="请求准备">
+	</message>
+
+	<message id="107" type="CS" name="ReqBet" explain="请求下注(下注筹码和上家一样即跟注,比上家多即加注)">
+		<field class="long" name="gold" explain="金币"></field>
+	</message>
+
+	<message id="108" type="CS" name="ReqAllBet" explain="请求全压">
+	</message>
+
+	<message id="109" type="CS" name="ReqSeeCard" explain="请求看牌">
+	</message>
+
+	<message id="111" type="CS" name="ReqDiscard" explain="请求弃牌">
+	</message>
+
+	<message id="113" type="CS" name="ReqVersus" explain="请求比牌">
+		<field class="long" name="otherPlayer" explain="比牌的另一个玩家id"></field>
+	</message>
+
+	<message id="114" type="CS" name="ReqAutoVersus" explain="请求自动比牌(钱不够时)">
+	</message>
+
+	<message id="115" type="CS" name="ReqExitRoom" explain="请求退出房间">
+	</message>
+
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResRooms" explain="返回房间数据">
+		<list class="RoomInfo" name="rooms" explain="房间"></list>
+	</message>
+
+	<message id="203" type="SC" name="ResEnterRoom" explain="进入房间结果">
+		<field class="int" name="roomId" explain="房间id"></field>
+		<list class="SeatInfo" name="seats" explain="桌子中的玩家信息"></list>
+	</message>
+
+	<message id="205" type="SC" name="ResGoldChange" explain="玩家金币变化消息">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="gold" explain="玩家金币"></field>
+	</message>
+
+	<message id="207" type="SC" name="ResReady" explain="玩家准备">
+		<field class="long" name="playerId" explain="玩家id"></field>
+	</message>
+
+	<message id="209" type="SC" name="ResBet" explain="下注结果">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="int" name="type" explain="0:暗注,非0:明注"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+	</message>
+
+	<message id="211" type="SC" name="ResSeeCard" explain="看牌结果">
+		<field class="int" name="cardsType" explain="牌型(1:单张,2:对子,3:顺子,4:金华,5:顺金,6:豹子)"></field>
+		<list class="int" name="cards" explain="牌"></list>
+	</message>
+
+	<message id="213" type="SC" name="ResSawCard" explain="玩家看过牌">
+		<field class="long" name="playerId" explain="玩家id"></field>
+	</message>
+
+	<message id="215" type="SC" name="ResDiscard" explain="弃牌结果">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id(0表示没有)"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+	</message>
+
+	<message id="217" type="SC" name="ResVersus" explain="比牌结果">
+		<field class="int" name="win" explain="0:输,非0:赢"></field>
+		<field class="long" name="playerId" explain="主动比牌玩家id"></field>
+		<field class="long" name="vsPlayerId" explain="被比牌玩家id"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id(0表示没有)"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+		<field class="long" name="gold" explain="比牌金币"></field>
+	</message>
+
+	<message id="219" type="SC" name="ResExitRoom" explain="玩家请求退出房间">
+		<field class="long" name="playerId" explain="玩家id"></field>
+	</message>
+
+	<message id="221" type="SC" name="ResOtherEnterTable" explain="其他人进入桌子">
+		<field class="SeatInfo" name="seat" explain="进入桌子的其他玩家"></field>
+	</message>
+
+	<message id="223" type="SC" name="ResReadyOver" explain="所有玩家准备,准备结束">
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id"></field>
+	</message>
+
+	<message id="225" type="SC" name="ResAllBet" explain="全压">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id(0表示没有)"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+	</message>
+
+	<message id="226" type="SC" name="ResAllBetResult" explain="全压结果">
+		<field class="int" name="win" explain="0:输,非0:赢"></field>
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="vsPlayerId" explain="被比牌玩家id"></field>
+		<field class="long" name="gold" explain="金币"></field>
+	</message>
+
+	<message id="227" type="SC" name="ResAutoVersus" explain="玩家请求自动比牌(钱不够时)结果">
+		<field class="int" name="res" explain="结果(0:输,非0:赢)"></field>
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id(0表示没有)"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+		<field class="long" name="gold" explain="自动比牌金币"></field>
+	</message>
+
+	<message id="229" type="SC" name="ResPlayerBills" explain="玩家结算消息">
+		<field class="int" name="type" explain="0:正常结算,1:超过轮数全场自动结算,2:玩家金币不足全场自动结算,3:比牌结算,4:全压结算"></field>
+		<list class="PlayerBillInfo" name="playerBills" explain="玩家结算信息"></list>
+		<list class="long" name="seeCardsAblePlayers" explain="可以看到牌的其他玩家"></list>
+	</message>
+
+	<message id="250" type="SC" name="ResRestore" explain="恢复游戏">
+		<field class="long" name="tblBetGold" explain="桌子合计下注金币"></field>
+		<field class="int" name="tblRound" explain="桌子轮数"></field>
+		<field class="Boolean" name="preDark" explain="是否暗注"></field>
+		<field class="long" name="preBetGold" explain="上一家下注"></field>
+		<list class="int" name="cards" explain="牌,玩家看过牌才有"></list>
+		<field class="int" name="cardsType" explain="牌型(1:单张,2:对子,3:顺子,4:金华,5:顺金,6:豹子),玩家看过牌才有"></field>
+		<field class="long" name="nextOptPlayerId" explain="下一个操作玩家id(0表示没有)"></field>
+		<field class="int" name="nextOptLeftTime" explain="下一个操作剩余时间(秒)"></field>
+		<field class="Boolean" name="allBetOpt" explain="下一个操作是否是全压操作"></field>
+	</message>
+</messages>	

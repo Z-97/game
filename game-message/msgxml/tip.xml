@@ -1,0 +1,27 @@
+<messages package="com.alex.game.tip" id="200" explain="提示消息">
+	<!-- bean定义 -->
+	
+	<!-- 服务器接收消息 -->
+
+
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResError" explain="通用错误消息">
+		<field class="int" name="msgId" explain="消息id"></field>
+		<list class="String" name="args" explain="消息参数"></list>
+	</message>
+	
+	<message id="203" type="SC" name="ResWarn" explain="通用警告消息">
+		<field class="int" name="msgId" explain="消息id"></field>
+		<list class="String" name="args" explain="消息参数"></list>
+	</message>
+	
+	<message id="205" type="SC" name="ResTip" explain="通用提示消息">
+		<field class="int" name="msgId" explain="消息id"></field>
+		<list class="String" name="args" explain="消息参数"></list>
+	</message>
+	
+	<message id="207" type="SC" name="ResShow" explain="通用右下角展示消息">
+		<field class="int" name="msgId" explain="消息id"></field>
+		<list class="String" name="args" explain="消息参数"></list>
+	</message>
+</messages>

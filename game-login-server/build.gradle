@@ -1,0 +1,20 @@
+apply plugin: 'application'
+
+dependencies {
+    compile project(':game-core')
+    compile project(':game-common')
+    compile project(':game-message')
+    compile project(':game-dbdata')
+    compile project(':game-dbdic')
+    compile project(':game-dblog')
+}
+
+mainClassName = 'LoginServerLauncher'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'LoginServerLauncher'
+    }
+}
+
+

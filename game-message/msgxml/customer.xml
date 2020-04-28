@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.plaza.customer" id="204" namespace="plaze" explain="客服">
+	<!-- dto定义 -->
+	
+	<!-- 服务器接收消息 -->
+	
+	<message id="101" type="CS" name="ReqSuugestReplay" explain="玩家查看反馈回复"> 
+	</message>
+	<!-- 服务器发送消息 -->
+	
+</messages>

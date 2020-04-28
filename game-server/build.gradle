@@ -1,0 +1,66 @@
+apply plugin: 'application'
+dependencies {
+    compile project(':game-core')
+    compile project(':game-common')
+    compile project(':game-message')
+    compile project(':game-dbdata')
+    compile project(':game-dbdic')
+    compile project(':game-dblog')
+    compile	'org.apache.httpcomponents:httpclient:4.5.3'
+	compile	'org.apache.httpcomponents:fluent-hc:4.5.3'
+	compile 'com.google.protobuf:protobuf-java:3.6.0' 
+	compile 'commons-io:commons-io:2.4'
+	compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.0.1'
+	compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+}
+mainClassName = 'ServerLauncher'
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'ServerLauncher'
+    }
+}
+
+// 拷贝资源文件
+processResources.doLast {
+	copy {
+		 from ('src/main/java') {
+			 include '**/*.xml'
+			 include '**/*.properties'
+		 }
+		 into 'build/classes/main'
+		 
+		 from 'src/main/resources'
+		 into 'build/resources/main'
+		 rename 'logback_build.xml', 'logback.xml'
+	}
+	
+	new File('build/resources/main/logback_build.xml').delete()
+}
+
+// 拷贝配置文件(config目录文件)
+task createConfigFiles {
+    def config = file("build/config")
+    outputs.dir config
+    doLast {
+        config.mkdirs()
+        copy {
+            from "config"
+            into config
+            
+            rename 'server_build.properties', 'server.properties'
+        }
+        
+        new File('build/config/server_build.properties').delete()
+    }
+}
+
+applicationDistribution.from(createConfigFiles) {
+    into "config"
+}

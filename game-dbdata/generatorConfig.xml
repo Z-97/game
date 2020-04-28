@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <context id="game-dbdata" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/game_data?useUnicode=true" userId="root" password="love200820" />
+    <javaModelGenerator targetPackage="com.alex.game.dbdata.maper_bak" targetProject="game-dbdata" />
+    <sqlMapGenerator targetPackage="com.alex.game.dbdata.maper_bak" targetProject="game-dbdata" ></sqlMapGenerator>
+    <javaClientGenerator targetPackage="com.alex.game.dbdata.maper_bak" targetProject="game-dbdata" type="XMLMAPPER" />
+    <table schema="player" tableName="player"></table>
+    <table schema="customer_message" tableName="customer_message"></table>
+    <table schema="redpackage" tableName="redpackage"></table>
+    <!-- <table schema="sys_email" tableName="sys_email"></table>
+    
+     <table schema="ip_limit" tableName="ip_limit"></table>-->
+  </context>
+</generatorConfiguration>

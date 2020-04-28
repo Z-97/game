@@ -1,0 +1,3 @@
+rootProject.name = 'game'
+include 'game-core','game-dbdic', 'game-dbdata', 'game-dblog', 
+		'game-message', 'game-server', 'game-robot', 'game-common'

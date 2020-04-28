@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.games.sgj" id="524" game="5">
+	<!-- bean定义 -->
+	<bean name="RoomInfo" explain="水果机房间信息">
+		<field class="int" name="roomId" explain="房间id"></field>
+		<field class="String" name="name" explain="房间名称"></field>
+		<field class="int" name="lower" explain="进入下限"></field>
+	</bean>
+	<bean name="LineRewardIcons" explain="水浒传线路中奖图标信息">
+		<field class="int" name="line" explain="中奖线路(从1开始)"></field>
+		<list class="int" name="indexs" explain="中奖图标索引(从1开始)"></list>
+	</bean>
+	<!-- 服务器接收消息 -->
+
+	<message id="101" type="CS" name="ReqRooms" explain="请求房间数据">
+	</message>
+	<message id="103" type="CS" name="ReqEnterRoom" explain="请求进入房间">
+		<field class="int" name="roomId" explain="房间id"></field>
+	</message>
+	<message id="105" type="CS" name="ReqStart" explain="玩家下注">
+		<field class="int" name="line" explain="押线数"></field>
+		<field class="long" name="gold" explain="下注金币"></field>
+	</message>
+	<message id="107" type="CS" name="ReqExitRoom" explain="请求退出房间">
+	</message>
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResRooms" explain="返回房间数据">
+		<list class="RoomInfo" name="rooms" explain="房间"></list>
+	</message>
+	<message id="203" type="SC" name="ResEnterRoom" explain="进入房间结果">
+	</message>
+	<message id="205" type="SC" name="ResBalance" explain="游戏结算">
+		<list class="int" name="icons" explain="图标(固定15个,按行取,每行5个)"></list>
+		<list class="LineRewardIcons" name="lineRewards" explain="线路中奖图标信息"></list>
+		<field class="long" name="totalWin" explain="合计赢的筹码(0:没有赢)"></field>
+	</message>
+	<message id="207" type="SC" name="ResExitRoom" explain="玩家退出房间">
+	</message>
+</messages>	

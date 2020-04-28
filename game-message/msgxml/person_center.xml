@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.plaza" id="202" namespace="plaza" explain="广场">
+	<!-- dto定义 -->
+
+	<!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqModifyNickname" explain="修改昵称">
+		<field class="String" name="nickname" explain="昵称"></field>
+	</message>
+	<message id="102" type="CS" name="ReqModifyPlayerInfo" explain="修改玩家信息">
+		<field class="int" name="sex" explain="性别"></field>
+		<field class="int" name="icon" explain="头像"></field>
+	</message>
+	<message id="104" type="CS" name="ReqBindingMob" explain="绑定手机号码">
+		<field class="String" name="phone" explain="手机号码"></field>
+		<field class="String" name="code" explain="验证码"></field>
+		<field class="String" name="pwd" explain="密码"></field>
+	</message>
+	<message id="106" type="CS" name="ReqBindingBankCard" explain="绑定银行卡">
+		<field class="String" name="bankCard" explain="卡号"></field>
+		<field class="String" name="bankUserName" explain="开户名"></field>
+		<field class="String" name="bankName" explain="开户行"></field>
+		<field class="String" name="branchName" explain="支行名称"></field>
+		<field class="String" name="provinceName" explain="所在省"></field>
+		<field class="String" name="cityName" explain="开户城市"></field>
+	</message>
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResModifyNickname" explain="修改昵称">
+		<field class="String" name="nickename" explain="昵称"></field>
+		<field class="int" name="res" explain="0成功1失败"></field>
+	</message>
+    <message id="202" type="SC" name="ResModifyPlayerInfo" explain="修改玩家信息">
+		<field class="int" name="sex" explain="性别0:男性,1:女性"></field>
+		<field class="int" name="icon" explain="头像"></field>
+	</message>
+	<message id="204" type="SC" name="ResBindingMob" explain="绑定手机号码">
+		<field class="String" name="phone" explain="手机号码"></field>
+		<field class="int" name="res" explain="-1成功,不送绑定金额0成功1手机码验证错误，绑定手机失败2手机密码为空，绑定手机失败3手机密码格式错误，绑定手机失败，4手机号码格式错误，绑定手机失败5该用户已经绑定手机号,绑定手机失败6该手机号已经绑定，请使用新手机号绑定"></field>
+	</message>
+	<message id="206" type="SC" name="ResBindingBankCard" explain="绑定银行卡">
+	     <field class="String" name="bankCard" explain="卡号"></field>
+	     <field class="String" name="bankUserName" explain="开户名"></field>
+	    <field class="int" name="res" explain="0成功;1银行卡号不正确;2银行卡号已经绑定;3开户名格式错误，绑定失败4账号已经绑定银行卡，绑定失败;5银行名称格式不正确；6支行格式错误；7开户城市格式错误8开户省格式错误"></field>
+	</message>
+	
+</messages>

@@ -1,0 +1,21 @@
+apply plugin: 'application'
+
+dependencies {
+    compile project(':game-core')
+    compile project(':game-common')
+    compile project(':game-message')
+    compile project(':game-dbdata')
+    compile project(':game-dbdic')
+    compile project(':game-dblog')
+    compile project(':game-rmi-service')
+}
+
+mainClassName = 'HubServerLauncher'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'HubServerLauncher'
+    }
+}
+
+

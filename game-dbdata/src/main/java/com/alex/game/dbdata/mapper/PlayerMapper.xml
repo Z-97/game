@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alex.game.dbdata.mapper.PlayerMapper">
+   <resultMap id="PlayerMap" type="com.alex.game.dbdata.dom.PlayerDom">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="channel_id" jdbcType="VARCHAR" property="channelId" />
+    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+    <result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+    <result column="register_device" jdbcType="INTEGER" property="registerDevice" />
+    <result column="register_device_model" jdbcType="VARCHAR" property="registerDeviceModel" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="register_mac" jdbcType="VARCHAR" property="registerMac" />
+    <result column="login_key" jdbcType="VARCHAR" property="loginKey" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="login_device" jdbcType="INTEGER" property="loginDevice" />
+    <result column="login_device_model" jdbcType="VARCHAR" property="loginDeviceModel" />
+    <result column="login_mac" jdbcType="VARCHAR" property="loginMac" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="logout_time" jdbcType="TIMESTAMP" property="logoutTime" />
+    <result column="tourist" jdbcType="BIT" property="tourist" />
+    <result column="tourist_mac" jdbcType="VARCHAR" property="touristMac" />
+    <result column="player_type" jdbcType="INTEGER" property="playerType" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="icon" jdbcType="INTEGER" property="icon" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="binding_phone_time" jdbcType="TIMESTAMP" property="bindingPhoneTime" />
+    <result column="gold" jdbcType="BIGINT" property="gold" />
+    <result column="tax" jdbcType="BIGINT" property="tax" />
+    <result column="win_gold" jdbcType="BIGINT" property="winGold" />
+    <result column="lose_gold" jdbcType="BIGINT" property="loseGold" />
+    <result column="recharge_money" jdbcType="BIGINT" property="rechargeMoney" />
+    <result column="exp" jdbcType="BIGINT" property="exp" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="online" jdbcType="BIT" property="online" />
+    <result column="vip_level" jdbcType="INTEGER" property="vipLevel" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+    <result column="bank_pwd" jdbcType="VARCHAR" property="bankPwd" />
+    <result column="bank_gold" jdbcType="BIGINT" property="bankGold" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="is_modfiy_nickname" jdbcType="BIT" property="isModfiyNickname" />
+    <result column="emails" jdbcType="LONGVARCHAR" property="emails" />
+    <result column="bank_records" jdbcType="LONGVARCHAR" property="bankRecords" />
+    <result column="email_tips" jdbcType="BIT" property="emailTips" />
+    <result column="transfer_gold_tips" jdbcType="BIT" property="transferGoldTips" />
+    <result column="customer_tips" jdbcType="BIT" property="customerTips" />
+    <result column="gift_records" jdbcType="LONGVARCHAR" property="giftRecords" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="is_robot" jdbcType="BIT" property="isRobot" />
+  </resultMap>
+  <resultMap id="PlayerRankMap" type="com.alex.game.dbdata.dom.PlayerRankDom">
+    <id column="id" jdbcType="BIGINT" property="playerId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="icon" jdbcType="INTEGER" property="iconId" />
+    <result column="signature" jdbcType="BIGINT" property="signature" />
+    <result column="total" jdbcType="BIGINT" property="gold" />
+  </resultMap>
+   <sql id="Column_List">
+	  id, user_name, nick_name, 
+      pwd, channel_id, package_id, 
+      register_ip, register_device, register_device_model, 
+      register_time, register_mac, login_key, 
+      login_ip, login_device, login_device_model, 
+      login_time, login_mac, login_count, 
+      logout_time, tourist, tourist_mac, 
+      player_type, sex, icon, 
+      phone, binding_phone_time, gold, 
+      tax, win_gold, lose_gold, 
+      recharge_money, exp, level, 
+      online, vip_level, locked, bank_pwd, 
+      bank_gold, update_time,  device_id,is_modfiy_nickname,emails,
+      bank_records,email_tips, transfer_gold_tips, customer_tips, gift_records,
+      signature,is_robot
+  </sql>
+   <resultMap id="PlayerRobotMap" type="com.alex.game.dbdata.dom.PlayerRobotDom">
+     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="channel_id" jdbcType="VARCHAR" property="channelId" />
+    <result column="package_id" jdbcType="VARCHAR" property="packageId" />
+    <result column="tourist" jdbcType="BIT" property="tourist" />
+    <result column="tourist_mac" jdbcType="VARCHAR" property="touristMac" />
+    <result column="player_type" jdbcType="INTEGER" property="playerType" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="alipay" jdbcType="VARCHAR" property="alipay" />
+    <result column="alipay_name" jdbcType="VARCHAR" property="alipayName" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+ </resultMap>
+    <!--  WHERE is_robot =true -->
+  <select id="selectRobots" resultMap="PlayerRobotMap">
+    select id, user_name, nick_name, channel_id, package_id, tourist, tourist_mac, player_type, phone, alipay, locked
+    from player   order by id limit ${from}, ${limit}
+  </select>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="PlayerMap">
+    select 
+    <include refid="Column_List" />
+    from player
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="PlayerMap">
+    select 
+    <include refid="Column_List" />
+    from player
+    where user_name = #{userName,jdbcType=BIGINT}
+  </select>
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="PlayerMap">
+    select 
+    <include refid="Column_List" />
+    from player
+    where phone = #{phone,jdbcType=BIGINT}
+  </select>
+  <select id="selectByTouristMac" parameterType="java.lang.String" resultMap="PlayerMap">
+	select 
+    <include refid="Column_List" />
+    from player
+    where tourist_mac = #{mac,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByBankCard" parameterType="java.lang.String" resultMap="PlayerMap">
+	select
+	<include refid="Column_List" />
+	from player
+	where bank_card = #{bankCard,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectActivePlayers" parameterType="java.util.Date" resultMap="PlayerMap">
+    select 
+    <include refid="Column_List" />
+    from player
+    where login_time > #{activeTime,jdbcType=TIMESTAMP} or logout_time > #{activeTime,jdbcType=TIMESTAMP}
+  </select>
+  <select id="selectAgentByGold"  resultMap="PlayerRankMap">
+     SELECT id,nick_name,icon,SUM(gold+bank_gold) as total ,signature FROM  player  GROUP BY id ORDER BY total DESC LIMIT 100 
+  </select>
+  <insert id="insert" parameterType="com.alex.game.dbdata.dom.PlayerDom" useGeneratedKeys="true" keyProperty="id">
+    insert into player (id,user_name, nick_name, 
+      pwd, channel_id, package_id, 
+      register_ip, register_device, register_device_model, 
+      register_time, register_mac, login_key, 
+      login_ip, login_device, login_device_model, 
+      login_time, login_mac, login_count, 
+      logout_time, tourist, tourist_mac, 
+      player_type, sex, icon, 
+      phone, binding_phone_time, gold, 
+      tax, win_gold, lose_gold, 
+      recharge_money, exp, level, 
+      online, vip_level, locked, bank_pwd, 
+      bank_gold, update_time, 
+      device_id,is_modfiy_nickname,emails,bank_records,email_tips, transfer_gold_tips, customer_tips, gift_records,
+      signature,is_robot)
+    values (#{id,jdbcType=BIGINT},#{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{packageId,jdbcType=VARCHAR}, 
+      #{registerIp,jdbcType=VARCHAR}, #{registerDevice,jdbcType=INTEGER}, #{registerDeviceModel,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{registerMac,jdbcType=VARCHAR}, #{loginKey,jdbcType=VARCHAR}, 
+      #{loginIp,jdbcType=VARCHAR}, #{loginDevice,jdbcType=INTEGER}, #{loginDeviceModel,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{loginMac,jdbcType=VARCHAR}, #{loginCount,jdbcType=INTEGER}, 
+      #{logoutTime,jdbcType=TIMESTAMP}, #{tourist,jdbcType=BIT}, #{touristMac,jdbcType=VARCHAR}, 
+      #{playerType,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{icon,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{bindingPhoneTime,jdbcType=TIMESTAMP}, #{gold,jdbcType=BIGINT}, 
+      #{tax,jdbcType=BIGINT}, #{winGold,jdbcType=BIGINT}, #{loseGold,jdbcType=BIGINT}, 
+      #{rechargeMoney,jdbcType=BIGINT}, #{exp,jdbcType=BIGINT}, #{level,jdbcType=INTEGER}, 
+      #{online,jdbcType=BIT}, #{vipLevel,jdbcType=INTEGER}, #{locked,jdbcType=BIT}, #{bankPwd,jdbcType=VARCHAR}, 
+      #{bankGold,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deviceId,jdbcType=VARCHAR},#{isModfiyNickname,jdbcType=BIT}, #{emails,jdbcType=LONGVARCHAR},
+      #{bankRecords,jdbcType=LONGVARCHAR}, #{emailTips,jdbcType=BIT}, #{transferGoldTips,jdbcType=BIT}, #{customerTips,jdbcType=BIT}, #{giftRecords,jdbcType=LONGVARCHAR}, #{signature,jdbcType=VARCHAR}, #{isRobot,jdbcType=BIT})
+  </insert>  
+  
+  <update id="updateById" parameterType="com.alex.game.dbdata.dom.PlayerDom">
+   update player
+    set user_name = #{userName,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      package_id = #{packageId,jdbcType=VARCHAR},
+      register_ip = #{registerIp,jdbcType=VARCHAR},
+      register_device = #{registerDevice,jdbcType=INTEGER},
+      register_device_model = #{registerDeviceModel,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      register_mac = #{registerMac,jdbcType=VARCHAR},
+      login_key = #{loginKey,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      login_device = #{loginDevice,jdbcType=INTEGER},
+      login_device_model = #{loginDeviceModel,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      login_mac = #{loginMac,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      logout_time = #{logoutTime,jdbcType=TIMESTAMP},
+      tourist = #{tourist,jdbcType=BIT},
+      tourist_mac = #{touristMac,jdbcType=VARCHAR},
+      player_type = #{playerType,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      binding_phone_time = #{bindingPhoneTime,jdbcType=TIMESTAMP},
+      gold = #{gold,jdbcType=BIGINT},
+      tax = #{tax,jdbcType=BIGINT},
+      win_gold = #{winGold,jdbcType=BIGINT},
+      lose_gold = #{loseGold,jdbcType=BIGINT},
+      recharge_money = #{rechargeMoney,jdbcType=BIGINT},
+      exp = #{exp,jdbcType=BIGINT},
+      level = #{level,jdbcType=INTEGER},
+      online = #{online,jdbcType=BIT},
+      vip_level = #{vipLevel,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=BIT},
+      bank_pwd = #{bankPwd,jdbcType=VARCHAR},
+      bank_gold = #{bankGold,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      is_modfiy_nickname = #{isModfiyNickname,jdbcType=BIT},
+      emails = #{emails,jdbcType=LONGVARCHAR},
+      bank_records = #{bankRecords,jdbcType=LONGVARCHAR},
+      email_tips = #{emailTips,jdbcType=BIT},
+      transfer_gold_tips = #{transferGoldTips,jdbcType=BIT},
+      customer_tips = #{customerTips,jdbcType=BIT},
+      gift_records = #{giftRecords,jdbcType=LONGVARCHAR},
+      signature = #{signature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+      
+  <update id="resetOnline">
+    update player set online = 0
+  </update>
+  
+  <update id="updatePlayerChannelId" >
+    update player set  channel_id = #{newChannelId,jdbcType=VARCHAR} where channel_id = #{oldChannelId,jdbcType=VARCHAR} and  package_id = #{packageId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateLockedByRegisterIp" >
+    update player set  locked = #{locked,jdbcType=BIT} where register_ip = #{ip,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateLockedByRegisterMac" >
+    update player set  locked = #{locked,jdbcType=BIT} where register_mac = #{mac,jdbcType=VARCHAR}
+  </update>
+</mapper>

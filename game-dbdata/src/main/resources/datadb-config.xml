@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright (c) 2016, Alex. All Rights Reserved. -->
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="logImpl" value="SLF4J" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.alex.game.core.db.HikariDataSourceFactory"
+			alias="HIKARI" />
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler javaType="java.util.concurrent.CopyOnWriteArrayList" handler="com.alex.game.dbdata.base.JsonTypeHandler" />
+		<typeHandler javaType="java.util.concurrent.ConcurrentHashMap" handler="com.alex.game.dbdata.base.JsonTypeHandler" />
+		<typeHandler javaType="java.util.concurrent.CopyOnWriteArraySet" handler="com.alex.game.dbdata.base.JsonTypeHandler" />
+		<typeHandler javaType="java.util.concurrent.atomic.AtomicLong" handler="com.alex.game.dbdata.base.JsonTypeHandler" /> 
+		
+	</typeHandlers>
+
+	<environments default="${environmentId}">
+		<environment id="${environmentId}">
+			<transactionManager type="JDBC" />
+			<dataSource type="HIKARI">
+				<!-- 基本属性 url、user、password -->
+				<property name="dataSourceClassName" value="${dataSourceClassName}" />
+				<property name="dataSource.url" value="${dataSource.url}" />
+				<property name="dataSource.user" value="${dataSource.user}" />
+				<property name="dataSource.password" value="${dataSource.password}" />
+				<property name="dataSource.cachePrepStmts" value="${dataSource.cachePrepStmts}" />
+				<property name="dataSource.prepStmtCacheSize" value="${dataSource.prepStmtCacheSize}" />
+				<property name="dataSource.prepStmtCacheSqlLimit" value="${dataSource.prepStmtCacheSqlLimit}" />
+				<property name="maximumPoolSize" value="${maximumPoolSize}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers> 
+		<mapper resource="com/alex/game/dbdata/mapper/PlayerMapper.xml" />
+		<mapper resource="com/alex/game/dbdata/mapper/CustomerMessageMapper.xml" />
+		<mapper resource="com/alex/game/dbdata/mapper/RedpackageMapper.xml" />
+	</mappers>
+</configuration>

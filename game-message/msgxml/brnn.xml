@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.games.brnn" id="521" game="2">
+    <!-- bean定义 -->
+	<bean name="RoomInfo" explain="房间信息">
+		<field class="int" name="id" explain="房间id"></field>
+		<field class="String" name="name" explain="房间名称"></field>
+		<field class="int" name="lower" explain="进入下限"></field>
+		<field class="int" name="applyBankerGold" explain="申请庄家金币"></field>
+		<field class="int" name="multipleLower" explain="倍数下限"></field>
+		<field class="int" name="multipleUpper" explain="倍数上限"></field>
+	</bean>
+	   
+    <bean name="AreaBetInfo" explain="区域下注信息">
+        <field class="int" name="area" explain="下注区域1-4(1:天,2:地,3:玄,4:黄)"></field>
+        <field class="long" name="gold" explain="下注金币"></field>
+    </bean>
+    
+    <bean name="CardsInfo" explain="牌信息">
+        <field class="int" name="index" explain="位置索引,0-4(0:庄家,1:天,2:地,3:玄,4:黄)"></field>
+        <list class="int" name="cards" explain="玩家的牌，已经是最优牌型(3+2)"></list>
+        <field class="int" name="cardsType" explain="牌型(0:没牛，1-10:牛1到牛牛,四花:11,四炸:12,五花:13,五小:14)"></field>
+    </bean>
+ 
+ 	<bean name="ApplicantInfo" explain="申请人信息">
+		<field class="long" name="playerId" explain="玩家id(0:代表座位上没有人)"></field>
+		<field class="String" name="nickName" explain="昵称"></field>
+		<field class="long" name="gold" explain="金币"></field>
+	</bean>	
+ 
+ 	<bean name="PlayerRankInfo" explain="玩家排名信息">
+		<field class="long" name="playerId" explain="玩家id"></field>
+		<field class="String" name="nickName" explain="昵称"></field>
+		<field class="int" name="icon" explain="头像"></field>
+		<field class="long" name="gold" explain="金币"></field>
+	</bean>	
+	   
+    <bean name="BankerInfo" explain="庄家信息">
+        <field class="long" name="playerId" explain="庄家id(0:系统)"></field>
+        <field class="String" name="nickName" explain="昵称"></field>
+		<field class="int" name="icon" explain="头像"></field>
+		<field class="long" name="gold" explain="金币"></field>
+        <field class="int" name="num" explain="局数"></field>
+        <field class="long" name="score" explain="成绩"></field>
+    </bean>
+	   
+    <bean name="WinInfo" explain="历史输赢信息">
+        <field class="int" name="tian" explain="天(0:输,非0:赢)"></field>
+        <field class="int" name="di" explain="地(0:输,非0:赢)"></field>
+        <field class="int" name="xuan" explain="玄(0:输,非0:赢)"></field>
+        <field class="int" name="huang" explain="黄(0:输,非0:赢)"></field>
+    </bean>
+
+    <!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqRooms" explain="请求房间数据">
+	</message>
+	
+	<message id="103" type="CS" name="ReqEnterRoom" explain="请求进入房间">
+		<field class="int" name="roomId" explain="房间id"></field>
+	</message>
+
+    <message id="104" type="CS" name="ReqPlayerBet" explain="玩家下注">
+      	<field class ="AreaBetInfo" name="areaBet" explain="区域下注信息"></field>
+    </message>
+
+    <message id="105" type="CS" name="ReqPlayerContinueBet" explain="玩家续压">
+      	<list class ="AreaBetInfo" name="areaBet" explain="区域下注信息"></list>
+    </message>
+
+    <message id="106" type="CS" name="ReqTblAreaBets" explain="获取桌子区域下注">
+    </message>
+
+    <message id="107" type="CS" name="ReqExitRoom" explain="请求退出房间">
+    </message>
+
+    <message id="109" type="CS" name="ReqApplyBanker" explain="玩家申请当庄家">
+    </message>
+  
+    <message id="111" type="CS" name="ReqCancelApplyBanker" explain="玩家取消申请当庄家">
+    </message>
+
+    <message id="113" type="CS" name="ReqOffBanker" explain="玩家请求下庄">
+    </message>
+
+    <!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResRooms" explain="返回房间数据">
+		<list class="RoomInfo" name="rooms" explain="房间"></list>
+	</message>
+
+	<message id="203" type="SC" name="ResEnterRoom" explain="进入房间结果">
+		<field class="int" name="roomId" explain="房间id"></field>
+	</message>
+
+	<message id="205" type="SC" name="ResExitRoom" explain="玩家退出房间">
+	</message>	
+		
+    <message id="207" type="SC" name="ResPlayerAreaBet" explain="返回玩家区域下注结果">
+        <field class ="AreaBetInfo" name="areaBet" explain="区域下注信息"></field>
+    </message>
+    
+    <message id="209" type="SC" name="ResTblAreaBets" explain="桌子区域下注信息">
+		<list class ="AreaBetInfo" name="areaBets" explain="区域下注信息"></list>
+    </message>
+    
+    <message id="211" type="SC" name="ResApplyBankers" explain="玩家申请庄家列表">
+    	<list class="ApplicantInfo" name="applicants" explain="申请人"></list>
+    </message>	
+
+    <message id="213" type="SC" name="ResBankerInfo" explain="庄家信息">
+        <field class="BankerInfo" name="banker" explain="庄家"></field>
+    </message>
+    
+  	<message id="215" type="SC" name="ResPlayerRanks" explain="玩家排名">
+		<list class="PlayerRankInfo" name="playerRanks" explain="玩家排名"></list>
+	</message>
+    
+  	<message id="216" type="SC" name="ResStage" explain="休息阶段">
+		<field class="int" name="stage" explain="1:休息,2:下注,3:游戏"></field>
+		<field class="int" name="time" explain="时间(秒)"></field>
+	</message>
+    
+  	<message id="217" type="SC" name="ResContinueBet" explain="玩家续压成功">
+	</message>
+
+	<message id="219" type="SC" name="ResBalance" explain="游戏结算消息">
+		<field class="int" name="winType" explain="输赢类型(0:普通,1:通杀,2:通赔)"></field>
+		<field class="WinInfo" name="winInfo" explain="输赢信息"></field>
+		<list class ="CardsInfo" name="cardsList" explain="牌信息(依次为庄家、天、地、玄、黄)"></list>
+        <field class="long" name="bankerGold" explain="庄家结算金币"></field>
+        <field class="long" name="playerGold" explain="玩家结算金币"></field>
+	</message>
+	
+ 	<message id="250" type="SC" name="ResRestore" explain="恢复游戏(游戏阶段信息从其他的消息发送)">
+ 		<list class ="AreaBetInfo" name="tblAreaBets" explain="桌子区域下注信息"></list>
+ 		<list class ="AreaBetInfo" name="playerAreaBets" explain="玩家自己的区域下注信息"></list>
+ 		<field class="BankerInfo" name="banker" explain="庄家"></field>
+ 		<list class="WinInfo" name="wins" explain="历史输赢信息"></list>
+ 		<list class="ApplicantInfo" name="applicants" explain="申请人"></list>
+ 		<list class="PlayerRankInfo" name="playerRanks" explain="玩家排名"></list>
+ 		<list class ="CardsInfo" name="cardsList" explain="牌信息(依次为庄家、天、地、玄、黄)"></list>
+	</message>   
+</messages>	

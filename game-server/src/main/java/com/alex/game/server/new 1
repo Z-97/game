@@ -1,0 +1,1 @@
+keytool -importkeystore -srckeystore D:\2469399_tapi.szdbi.com_tomcat/2469399_tapi.szdbi.com.pfx -destkeystore a.jks -srcstoretype PKCS12 -deststoretype JKS

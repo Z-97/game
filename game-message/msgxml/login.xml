@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages package="com.alex.game.login" id="100" namespace="login" explain="登录">
+	<!-- dto定义 -->
+	<bean name="SmallGame" explain="小游戏列表">
+		<field class="int" name="id" explain="游戏id"></field>
+		<field class="int" name="state" explain="0关闭1开启2暂未开放"></field>
+	</bean>	
+	<bean name="PackageControl" explain="包开关">
+	    <field class="int" name="isShowAlipayBind" explain="支付宝绑定0:关闭,1开启"></field>
+		<field class="int" name="isShowPmd" explain=" 跑马灯0:关闭,1开启"></field>
+		<field class="int" name="isShowDuiHuan" explain="是否显示兑换0:关闭,1开启"></field>
+		<field class="int" name="isShowBuyuFCSM" explain="是否显示捕鱼的分场说明0:关闭,1开启"></field>
+		<field class="int" name="isEnterSmallGame" explain="是否能进入小游戏0:关闭,1开启"></field>
+		<field class="int" name="isShowHelp" explain="是否显示客服按钮0:关闭,1开启"></field>
+		<field class="int" name="isShowEmail" explain="是否显示消息按钮0:关闭,1开启"></field>
+		<field class="int" name="isShowGGAndBindGuide" explain="是否显示绑定引导和公告弹窗0:关闭,1开启"></field>
+		<field class="int" name="isShowVip" explain="是否显示vip0:关闭,1开启"></field>
+		<field class="int" name="isSwitchRecharge" explain="是否切换到非审核的充值状态,1开启"></field>
+		<field class="int" name="isShowWechatRecharge" explain="是否显示充值微信tab按钮:关闭,1开启"></field>
+		<field class="int" name="isShowAgentRecharge" explain="是否显示代理充值0:关闭,1开启"></field>
+		<field class="int" name="isShowAgentZs" explain=" 是否可以显示代理招商:关闭,1开启"></field>
+		<field class="int" name="isShowApplyAgent" explain="是否可以申请代理0:否,1是"></field>
+		<field class="int" name="isShowAlipayRecharge" explain="是否显示支付"></field>
+		<field class="int" name="isBankTransfer" explain="是否显示银行转账"></field> 
+	    <field class="int" name="isAlipayExchange" explain="是否显示支付宝兑换"></field>
+	    <field class="int" name="isAgentExchange" explain="是否显示代理兑换"></field>
+	    <field class="int" name="isShowQqpayRecharge" explain="是否显示QQ支付"></field>
+	    <field class="int" name="isShowUnionPayRecharge" explain="是是否显示银连支付"></field>
+	    <field class="int" name="isJdPayRecharge" explain="是否显示京东支付"></field>
+	</bean>
+	<bean name="SystemControl" explain="客户端显示开关">
+	     <field class="Boolean" name="isAlipayExchange" explain="是否显示支付宝兑换"></field>
+	     <field class="Boolean" name="isAlipay" explain="是否显示支付宝充值"></field>
+	     <field class="Boolean" name="isWechat" explain="是否显示微信充值"></field>
+	     <field class="Boolean" name="isShowAgentZs" explain="是否可以显示代理招商"></field>
+	     <field class="Boolean" name="isShowApplyAgent" explain="是否可以申请代理"></field>
+	     <field class="Boolean" name="isAgentRecharge" explain="是否显示代理充值"></field> 
+	     <field class="Boolean" name="isAgentExchange" explain="是否显示代理兑换"></field> 
+	     <field class="Boolean" name="isBankTransfer" explain="是否显示银行转账"></field> 
+	     <field class="Boolean" name="isBankCardExchange" explain="是否显示银行卡兑换"></field>
+	     <field class="Boolean" name="isShowQqpayRecharge" explain="是否显示QQ支付"></field>
+	     <field class="Boolean" name="isShowUnionPayRecharge" explain="是是否显示银连支付"></field>
+	     <field class="Boolean" name="isJdPayRecharge" explain="是否显示京东支付"></field>
+	</bean>
+	<!-- 服务器接收消息 -->
+	<message id="101" type="CS" name="ReqLogin" explain="用户登陆">
+		<field class="String" name="userName" explain="用户名"></field>
+		<field class="String" name="pwd" explain="密码"></field>
+		<field class="String" name="mac" explain="机器码"></field>
+		<field class="String" name="key" explain="登陆key"></field>
+		<field class="int" name="device" explain="0:Android,1:iphone"></field>
+		<field class="String" name="deviceModel" explain="设备型号"></field>
+		<field class="String" name="deviceId" explain="设备id"></field>
+	</message>
+	
+	<message id="103" type="CS" name="ReqPhoneLogin" explain="用户手机登陆">
+		<field class="String" name="phone" explain="手机号"></field>
+		<field class="String" name="code" explain="验证码"></field>
+		<field class="String" name="mac" explain="机器码"></field>
+		<field class="String" name="packageId" explain="包id"></field>
+		<field class="int" name="device" explain="0:Android,1:iphone"></field>
+		<field class="String" name="deviceModel" explain="设备型号"></field>
+		<field class="String" name="deviceId" explain="设备id"></field>
+	</message>
+
+	<message id="105" type="CS" name="ReqTouristLogin" explain="游客登录">
+		<field class="String" name="mac" explain="机器码"></field>
+		<field class="String" name="packageId" explain="包id"></field>
+		<field class="int" name="device" explain="0:Android,1:iphone"></field>
+		<field class="String" name="deviceModel" explain="设备型号"></field>
+		<field class="String" name="deviceId" explain="设备id"></field>
+	</message>
+
+	<message id="109" type="CS" name="ReqCheckUserName" explain="校验用户名">
+		<field class="String" name="userName" explain="玩家用户名"></field>
+	</message>
+	
+	<message id="113" type="CS" name="ReqLogout" explain="退出登录">
+	</message>	
+
+	<message id="115" type="CS" name="ReqResetPwd" explain="重置密码">
+		<field class="String" name="phone" explain="手机号"></field>
+		<field class="String" name="code" explain="验证码"></field>
+		<field class="String" name="pwd" explain="密码"></field>
+	</message>	
+
+	<message id="117" type="CS" name="ReqGetPhoneLoginCode" explain="获取手机登陆验证码">
+		<field class="String" name="phone" explain="手机号"></field>
+		<field class="int" name="serialNumber" explain="序号"></field>
+	</message>	
+
+	<message id="150" type="CS" name="ReqPing" explain="心跳消息">
+	</message>	
+
+	<message id="151" type="CS" name="ReqIp" explain="ip消息">
+		<field class="String" name="ip" explain="手机号"></field>
+	</message>	
+	
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResLogout" explain="退出消息">
+		<field class="int" name="type" explain="0:正常退出,1:同一个账号重复登录被T号退出,2:玩家被冻结退出,3:玩家被清除游戏退出,4:停服玩家T出"></field>
+	</message>
+
+	<message id="203" type="SC" name="ResCheckUserName" explain="校验用户名结果">
+		<field class="int" name="res" explain="0:成功即该用户名可以注册,1:用户名已经存在,2:用户名格式错误"></field>
+	</message>
+	
+	<message id="207" type="SC" name="ResResetPwd" explain="重置密码成功">
+		<field class="int" name="res" explain="0:成功,1:密码格式错误,2:账号不存在"></field>
+	</message>
+	
+	<message id="209" type="SC" name="ResLogin" explain="用户登陆">
+		<field class="int" name="res" explain="0:成功,1:用户名不存在,2:登陆key错误,3:密码错误"></field>
+	</message>
+
+	<message id="249" type="SC" name="ResPong" explain="心跳返回消息">
+	</message>	
+		
+	<message id="250" type="SC" name="ResGameStart" explain="游戏开始消息">
+	    <list class="SmallGame" name="games" explain="小游戏列表"></list>
+		<field class="PackageControl" name="packageControl" explain="包开关"></field>
+		<field class="SystemControl" name="systemControl" explain="系统开关"></field>
+	</message>
+
+ 	<message id="251" type="SC" name="ResRestoreAble" explain="可以恢复游戏">
+		<field class="int" name="game" explain="游戏"></field>
+		<field class="int" name="room" explain="房间"></field>
+	</message>
+	
+	<message id="252" type="SC" name="ResBlackList" explain="黑名单禁止操作">
+	</message>
+</messages>

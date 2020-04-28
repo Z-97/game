@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<messages package="com.alex.game.player" id="101" namespace="player" explain="玩家">
+	<!-- dto定义 -->
+	<bean name="PlayerInfo" explain="玩家信息">
+		<field class="long" name="id" explain="玩家id"></field>
+		<field class="String" name="userName" explain="用户名"></field>
+		<field class="String" name="nickName" explain="昵称"></field>
+		<field class="String" name="loginIp" explain="登陆ip"></field>
+		<field class="Boolean" name="tourist" explain="是否游客"></field>
+		<field class="int" name="sex" explain="性别(0:男,非0:女)"></field>
+		<field class="int" name="icon" explain="头像id"></field>
+		<field class="String" name="phone" explain="手机"></field>
+		<field class="long" name="gold" explain="金币"></field>
+		<field class="long" name="bankGold" explain="银行金币"></field>
+		<field class="long" name="exp" explain="经验"></field>
+		<field class="int" name="level" explain="等级"></field>
+		<field class="int" name="vipLevel" explain="vip等级(0:不是vip)"></field>
+		<field class="String" name="alipay" explain="支付宝"></field>
+		<field class="String" name="alipayName" explain="支付宝姓名"></field>
+		<field class="long" name="recharge" explain="充值金额"></field>
+		<field class="Boolean" name="transferGoldTips" explain="是否提示转账"></field>
+		<field class="Boolean" name="customerTips" explain="是否提示客服反馈"></field>
+		<field class="Boolean" name="emailTips" explain="是否新邮件"></field>
+		<field class="Boolean" name="agent" explain="是否代理(0：不是)"></field>
+		<field class="String" name="key" explain="登陆key"></field>
+		<field class="String" name="registerTime" explain="注册时间"></field>
+		<field class="String" name="packageId" explain="包id"></field>
+		<field class="int" name="extensionPersonType" explain="推广员类型(2:线上推广员,3:线下推广员,非2、3:其他类型)"></field>
+		<field class="String" name="bankCard" explain="银行卡号"></field>
+		<field class="String" name="bankUserName" explain="银行开户姓名"></field>
+		<field class="Boolean" name="isIpLimit" explain="0现在1不限制"></field>
+	</bean>	
+	<bean name="RechargeTips" explain="充值提示">
+	   <field class="long" name="recharge" explain="充值金额"></field>
+	   <field class="int" name="type" explain="充值到账类型(0:身上;1:银行)"></field>
+	</bean>
+	<!-- 服务器接收消息 -->
+	<!-- 服务器发送消息 -->
+	<message id="201" type="SC" name="ResPlayerInfo" explain="玩家信息">
+		<field class="PlayerInfo" name="playerInfo" explain="玩家信息"></field>
+	</message>
+	<message id="203" type="SC" name="ResGoldChange" explain="玩家金币改变">
+		<field class="long" name="val" explain="属性值"></field>
+	</message>	
+	<message id="205" type="SC" name="ResBankGoldChange" explain="玩家银行金币改变">
+		<field class="long" name="val" explain="属性值"></field>
+	</message>	
+	<message id="207" type="SC" name="ResExpChange" explain="玩家经验改变">
+		<field class="long" name="val" explain="属性值"></field>
+	</message>	
+	<message id="209" type="SC" name="ResLevelChange" explain="玩家等级改变">
+		<field class="int" name="val" explain="属性值"></field>
+	</message>	
+	<message id="211" type="SC" name="ResVIPChange" explain="玩家VIP等级改变">
+		<field class="int" name="val" explain="属性值"></field>
+	</message>
+	<message id="213" type="SC" name="ResRechargeMoneyChange" explain="玩家充值金额改变">
+		<field class="long" name="val" explain="属性值"></field>
+	</message>
+	<message id="215" type="SC" name="ResRechargeSuccessTips" explain="玩家充值成功tips">
+	   <list class="RechargeTips" name="tips" explain="充值提示"></list>
+	</message>
+</messages>
